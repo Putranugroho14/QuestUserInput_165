@@ -13,7 +13,7 @@ import java.lang.reflect.Modifier
 fun FormDataDiri(modifier: Modifier
 ){
 
-
+    var textNama by remember{mutableStateOf("")}
 
 
 
