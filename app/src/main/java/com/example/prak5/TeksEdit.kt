@@ -3,10 +3,10 @@ package com.example.prak5
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
@@ -29,83 +29,115 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 
-
 @Composable
+fun FormDataDiri(modifier: Modifier = Modifier) {
 
-fun FormDataDiri(modifier: Modifier
-){
-    var textNama by remember{mutableStateOf("")}
-    var textAlamat by remember{mutableStateOf("")}
-    var textJK by remember{mutableStateOf("")}
+    var textNama by remember { mutableStateOf("") }
+    var textAlamat by remember { mutableStateOf("") }
+    var textJK by remember { mutableStateOf("") }
 
-    var nama by remember{mutableStateOf("")}
-    var alamat by remember{mutableStateOf("")}
-    var jenis by remember{mutableStateOf("")}
 
-    val gender:List<String> = listOf("Laki-laki","Perempuan")
+    var nama by remember { mutableStateOf("") }
+    var alamat by remember { mutableStateOf("") }
+    var jenis by remember { mutableStateOf("") }
 
-    Column(modifier = Modifier.padding(top = 50.dp),
-        verticalArrangement = Arrangement.Top,
+    val gender: List<String> = listOf("Laki-laki", "Perempuan")
 
-        horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        modifier = modifier
+            .padding(16.dp)
+            .fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(16.dp), // Jarak antar komponen
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         OutlinedTextField(
             value = textNama,
             singleLine = true,
             shape = MaterialTheme.shapes.large,
-            modifier = Modifier.width(250.dp),
-
+            modifier = Modifier.fillMaxWidth(0.9f),
             label = { Text(text = "Nama Lengkap") },
-            onValueChange = {
-                textNama = it
-            }
+            onValueChange = { textNama = it }
         )
-    }
-    Row {
-        gender.forEach { item ->
-            Row(modifier = Modifier.selectable(
-                    selected = textJK == item,
 
-                    onClick = { textJK = item }
-                ), verticalAlignment = Alignment.CenterVertically) {
-                RadioButton(
-                    selected = textJK == item,
 
-                    onClick = {
-                        textJK = item
-                    })
-                Text(item)
+        Row(
+            modifier = Modifier.fillMaxWidth(0.9f),
+            horizontalArrangement = Arrangement.SpaceAround
+        ) {
+            gender.forEach { item ->
+                Row(
+                    modifier = Modifier.selectable(
+                        selected = textJK == item,
+                        onClick = { textJK = item }
+                    ),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    RadioButton(
+                        selected = textJK == item,
+                        onClick = { textJK = item }
+                    )
+                    Text(item)
+                }
+            }
+        }
+
+
+        OutlinedTextField(
+            value = textAlamat,
+            singleLine = true,
+            modifier = Modifier.fillMaxWidth(0.9f),
+            label = { Text(text = "Alamat Lengkap") },
+            onValueChange = { textAlamat = it }
+        )
+
+
+        Divider(
+            modifier = Modifier.fillMaxWidth(0.9f),
+            thickness = dimensionResource(R.dimen.divider_tipis),
+            color = Color.DarkGray
+        )
+
+
+        Button(
+            modifier = Modifier.fillMaxWidth(0.9f),
+
+            enabled = textNama.isNotEmpty() && textAlamat.isNotEmpty() && textJK.isNotEmpty(),
+            onClick = {
+
+                nama = textNama
+                jenis = textJK
+                alamat = textAlamat
+            }
+        ) {
+            Text(stringResource(R.string.submit))
+        }
+
+
+        Divider(
+            modifier = Modifier.fillMaxWidth(0.9f),
+            thickness = dimensionResource(R.dimen.divider_tipis),
+            color = Color.DarkGray
+        )
+
+
+        ElevatedCard(
+            elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.Black),
+            modifier = Modifier
+                .height(100.dp)
+                .fillMaxWidth(0.95f)
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 10.dp)
+                    .fillMaxSize(),
+                verticalArrangement = Arrangement.SpaceAround
+            ) {
+
+                Text(text = "Nama   : $nama", color = Color.White)
+                Text(text = "Gender : $jenis", color = Color.White)
+                Text(text = "Alamat : $alamat", color = Color.White)
             }
         }
     }
-    OutlinedTextField(
-        value = textAlamat,
-        singleLine = true,
-        modifier = Modifier.width(250.dp),
-        label = { Text(text = "Alamat Lengkap") },
-        onValueChange = {
-            textAlamat = it
-        }
-    )
-    Divider(
-        modifier = Modifier.padding(bottom = dimensionResource(R.dimen.padding_medium), top = dimensionResource(
-            id = R.dimen.padding_medium
-        )),
-        thickness = dimensionResource(R.dimen.divider_tipis),
-        color = Color.DarkGray
-    )
-    Button(
-        modifier = Modifier.fillMaxWidth(1f),
-        //the button is enabled when the user makes a selection
-        enabled = textAlamat.isNotEmpty(),
-        onClick = {
-            nama = textNama
-            jenis = textJK
-            alamat = textAlamat
-        }
-    ) {
-        Text(stringResource(R.string.submit))
-    }
-
-
 }
-
