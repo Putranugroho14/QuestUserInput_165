@@ -153,55 +153,16 @@ fun FormDataDiri(modifier: Modifier = Modifier) {
                 label = { Text("Alamat Lengkap") },
                 onValueChange = { textAlamat = it }
             )
-
-
-            Row(
-                modifier = Modifier.fillMaxWidth(0.9f),
-                horizontalArrangement = Arrangement.SpaceAround
-            ) {
-                gender.forEach { item ->
-                    Row(
-                        modifier = Modifier.selectable(
-                            selected = textJK == item,
-                            onClick = { textJK = item }
-                        ),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        RadioButton(
-                            selected = textJK == item,
-                            onClick = { textJK = item }
-                        )
-                        Text(item)
-                    }
-                }
-            }
-
-
-            OutlinedTextField(
-                value = textAlamat,
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth(0.9f),
-                label = { Text(text = "Alamat Lengkap") },
-                onValueChange = { textAlamat = it }
-            )
-
-
-            Divider(
-                modifier = Modifier.fillMaxWidth(0.9f),
-                thickness = dimensionResource(R.dimen.divider_tipis),
-                color = Color.DarkGray
-            )
-
-
             Button(
-                modifier = Modifier.fillMaxWidth(0.9f),
-
-                enabled = textNama.isNotEmpty() && textAlamat.isNotEmpty() && textJK.isNotEmpty(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 10.dp, bottom = 5.dp),
+                enabled = textNama.isNotEmpty() && textAlamat.isNotEmpty(),
                 onClick = {
-
                     nama = textNama
-                    jenis = textJK
                     alamat = textAlamat
+                    jenis = textJK
+                    pekerjaan = textPekerjaan
                 }
             ) {
                 Text(stringResource(R.string.submit))
