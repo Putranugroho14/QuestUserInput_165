@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ElevatedCard
@@ -165,34 +166,26 @@ fun FormDataDiri(modifier: Modifier = Modifier) {
                     pekerjaan = textPekerjaan
                 }
             ) {
-                Text(stringResource(R.string.submit))
+                Text("Submit")
             }
 
 
-            Divider(
-                modifier = Modifier.fillMaxWidth(0.9f),
-                thickness = dimensionResource(R.dimen.divider_tipis),
-                color = Color.DarkGray
-            )
-
-
-            ElevatedCard(
-                elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.Black),
-                modifier = Modifier
-                    .height(100.dp)
-                    .fillMaxWidth(0.95f)
-            ) {
-                Column(
+            if (nama.isNotEmpty()) {
+                Card(
+                    elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.Black),
                     modifier = Modifier
-                        .padding(horizontal = 16.dp, vertical = 10.dp)
-                        .fillMaxSize(),
-                    verticalArrangement = Arrangement.SpaceAround
+                        .fillMaxWidth()
+                        .padding(top = 16.dp)
                 ) {
-
-                    Text(text = "Nama   : $nama", color = Color.White)
-                    Text(text = "Gender : $jenis", color = Color.White)
-                    Text(text = "Alamat : $alamat", color = Color.White)
+                    Column(
+                        modifier = Modifier.padding(horizontal = 5.dp, vertical = 15.dp)
+                    ) {
+                        Text(text = "Nama   : $nama", color = Color.White)
+                        Text(text = "Gender : $jenis", color = Color.White)
+                        Text(text = "Status Pekerjaan : $pekerjaan", color = Color.White)
+                        Text(text = "Alamat : $alamat", color = Color.White)
+                    }
                 }
             }
         }
