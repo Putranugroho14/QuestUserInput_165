@@ -91,6 +91,11 @@ fun FormDataDiri(modifier: Modifier = Modifier) {
                 label = { Text(text = "Nama Lengkap") },
                 onValueChange = { textNama = it }
             )
+            Text(
+                text = "Jenis Kelamin",
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(bottom = 5.dp, start = 4.dp)
+            )
 
 
             Row(
