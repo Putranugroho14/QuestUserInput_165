@@ -39,16 +39,16 @@ fun FormDataDiri(modifier: Modifier = Modifier) {
     var textNama by remember { mutableStateOf("") }
     var textAlamat by remember { mutableStateOf("") }
     var textJK by remember { mutableStateOf("") }
-    var textPekerjaan by remember { mutableStateOf("") }
+    var textPerkawinan by remember { mutableStateOf("") }
 
 
     var nama by remember { mutableStateOf("") }
     var alamat by remember { mutableStateOf("") }
     var jenis by remember { mutableStateOf("") }
-    var pekerjaan by remember { mutableStateOf("") }
+    var perkawinan by remember { mutableStateOf("") }
 
     val gender: List<String> = listOf("Laki-laki", "Perempuan")
-    val pekerjaanList = listOf("Mahasiswa", "Haram", "Halal")
+    val perkawinanList = listOf("Lajang", "Duda", "Janda")
 
     Box(
         modifier = Modifier
@@ -117,24 +117,24 @@ fun FormDataDiri(modifier: Modifier = Modifier) {
                 }
             }
             Text(
-                text = "Status Pekerjaan",
+                text = "Status Perkawinan",
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(bottom = 5.dp, start = 4.dp)
             )
             Column(modifier = Modifier.padding(bottom = 15.dp)) {
-                pekerjaanList.forEach { item ->
+                perkawinanList.forEach { item ->
                     Row(
                         modifier = Modifier
                             .selectable(
-                                selected = textPekerjaan == item,
-                                onClick = { textPekerjaan = item }
+                                selected = textPerkawinan == item,
+                                onClick = { textPerkawinan = item }
                             )
                             .padding(vertical = 2.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         RadioButton(
-                            selected = textPekerjaan == item,
-                            onClick = { textPekerjaan = item }
+                            selected = textPerkawinan == item,
+                            onClick = { textPerkawinan = item }
                         )
                         Text(item)
                     }
@@ -163,7 +163,7 @@ fun FormDataDiri(modifier: Modifier = Modifier) {
                     nama = textNama
                     alamat = textAlamat
                     jenis = textJK
-                    pekerjaan = textPekerjaan
+                    perkawinan = textPerkawinan
                 }
             ) {
                 Text("Submit")
@@ -183,7 +183,7 @@ fun FormDataDiri(modifier: Modifier = Modifier) {
                     ) {
                         Text(text = "Nama   : $nama", color = Color.White)
                         Text(text = "Gender : $jenis", color = Color.White)
-                        Text(text = "Status Pekerjaan : $pekerjaan", color = Color.White)
+                        Text(text = "Status Perkawinan : $perkawinan", color = Color.White)
                         Text(text = "Alamat : $alamat", color = Color.White)
                     }
                 }
